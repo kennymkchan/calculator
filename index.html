@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web-Based Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="calculator.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Web-based calculator">
+    <!-- <link rel="canonical" href="/" /> -->
+  </head>
+
+  <body>
+    <h2 class="small-note">
+      *** This takes input from the keyboard! ***
+    </h2>
+    <div class="calculator--frame">
+      <div class="calculator--display-container">
+        <div class="calculator--display-history">
+        </div>
+
+        <div class="calculator--display-current">
+        </div>
+      </div>
+      <div class="calculator--input-container">
+
+        <button id="button--7" class="base--button input-button button-number" value="7">7</button>
+        <button id="button--8" class="base--button input-button button-number" value="8">8</button>
+        <button id="button--9" class="base--button input-button button-number" value="9">9</button>
+        <div class="symbol-container">
+          <button id="button--divide" class="base--button input-button button-symbol" value="/">/</button>
+        </div>
+        <div class="symbol-container">
+          <button id="button--sin" class="base--button input-button button-symbol" value="sin(">sin</button>
+        </div>
+
+
+        <button id="button--4" class="base--button input-button button-number" value="4">4</button>
+        <button id="button--5" class="base--button input-button button-number" value="5">5</button>
+        <button id="button--6" class="base--button input-button button-number" value="6">6</button>
+        <div class="symbol-container">
+          <button id="button--multiply" class="base--button input-button button-symbol" value="*">*</button>
+        </div>
+        <div class="symbol-container">
+          <button id="button--cos" class="base--button input-button button-symbol" value="cos(">cos</button>
+        </div>
+
+
+        <button id="button--1" class="base--button input-button button-number" value="1">1</button>
+        <button id="button--2" class="base--button input-button button-number" value="2">2</button>
+        <button id="button--3" class="base--button input-button button-number" value="3">3</button>
+        <div class="symbol-container">
+          <button id="button--minus" class="base--button input-button button-symbol" value="-">-</button>
+        </div>
+        <div class="symbol-container">
+          <button id="button--open-bracket" class="base--button input-button button-symbol" value="(">(</button>
+        </div>
+
+
+        <button id="button--clear" class="base--button button-clear" value="clear">C</button>
+        <button id="button--0" class="base--button input-button button-number" value="0">0</button>
+        <button id="button--decimal" class="base--button input-button button-decimal" value=".">.</button>
+        <div class="symbol-container">
+          <button id="button--plus" class="base--button input-button button-symbol" value="+">+</button>
+        </div>
+        <div class="symbol-container">
+          <button id="button--close-bracket" class="base--button input-button button-symbol" value=")">)</button>
+        </div>
+
+        <div class="function-container">
+          <button id="button--equal" class="base--button button-equal drop-shadow" value="equal">=</button>
+        </div>
+      <div>
+    </div>
+  </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    // On Document ready (DOM has been loaded)
+    $(document).ready(function() {
+
+      // Global variable for user input expression
+      var maxDecimalPlaces = 11;
+
+      // Special listener for backspace that is not detected with
+      // `document.onkeypress`
+      document.onkeyup = function (key) {
+        key = key || window.event;
+        if (key.keyCode === 8) {
+          // To prevent backspace from going back on the page
+          event.stopPropagation();
+          $( "#button--clear" ).trigger( "click" );
+        }
+      }
+
+      // Listen for user input VIA keyboard
+      document.onkeypress = function (key) {
+        key = key || window.event;
+        var inputKey = key.keyCode;
+
+        if (inputKey === 40) {
+          $( "#button--open-bracket" ).trigger( "click" );
+        } else if (inputKey === 41) {
+          $( "#button--close-bracket" ).trigger( "click" );
+        }  else if (inputKey === 42) {
+          $( "#button--multiply" ).trigger( "click" );
+        }  else if (inputKey === 43) {
+          $( "#button--plus" ).trigger( "click" );
+        } else if (inputKey === 45) {
+          $( "#button--minus" ).trigger( "click" );
+        } else if (inputKey === 46) {
+          $( "#button--decimal" ).trigger( "click" );
+        } else if (inputKey === 47) {
+          $( "#button--divide" ).trigger( "click" );
+        } else if (inputKey === 48) {
+          $( "#button--0" ).trigger( "click" );
+        } else if (inputKey === 49) {
+          $( "#button--1" ).trigger( "click" );
+        } else if (inputKey === 50) {
+          $( "#button--2" ).trigger( "click" );
+        } else if (inputKey === 51) {
+          $( "#button--3" ).trigger( "click" );
+        } else if (inputKey === 52) {
+          $( "#button--4" ).trigger( "click" );
+        } else if (inputKey === 53) {
+          $( "#button--5" ).trigger( "click" );
+        } else if (inputKey === 54) {
+          $( "#button--6" ).trigger( "click" );
+        } else if (inputKey === 55) {
+          $( "#button--7" ).trigger( "click" );
+        } else if (inputKey === 56) {
+          $( "#button--8" ).trigger( "click" );
+        } else if (inputKey === 57) {
+          $( "#button--9" ).trigger( "click" );
+        } else if (inputKey === 61 || inputKey === 13) {
+          $( "#button--equal" ).trigger( "click" );
+        }
+      };
+
+      // Listeners
+      $(".input-button").click(function() {
+        var buttonValue = $(this).val();
+        // Set the calculator input
+        $(".calculator--display-current").append(buttonValue);
+      });
+
+      $(".button-equal").click(function() {
+        // Pull the current expression from user input
+        var userExpression = $(".calculator--display-current").html();
+        var sanitizedInput = sanitizeExpression(userExpression);
+        var output = eval(sanitizedInput);
+
+        if (output !== undefined) {
+          // Fix the output to only display a max of 11 decimal places
+          output = parseFloat(output.toFixed(maxDecimalPlaces));
+          $(".calculator--display-current").html(output);
+        } else {
+          $(".calculator--display-current").html("Undefined");
+        }
+      });
+
+      $(".button-clear").click(function() {
+        $(".calculator--display-current").html("");
+      });
+
+      function sanitizeExpression(userInput) {
+        // Sanitize the data with a regex
+        var sanitizedExpression = userInput.replace(/[^-()\d/*+./^sin$//^cos$/]/g, '');
+        var mathOperations = {
+          'sin': 'Math.sin',
+          'cos': 'Math.cos'
+        };
+        // Replace sin and cos with corresponding math operations
+        for (key in mathOperations) {
+          var operation = new RegExp(key, "g");
+          sanitizedExpression = sanitizedExpression.replace(operation, mathOperations[key]);
+        }
+
+        var modifiedExpression = checkSecondOperand(sanitizedExpression);
+
+        return modifiedExpression;
+      }
+
+      function checkSecondOperand(userInput) {
+        // Safe gaurd against expressions such as "33-", "33*",
+        // which would throw an error
+        var lastOperand = userInput.slice(-1);
+        if (lastOperand === "/" ||
+            lastOperand === "-" ||
+            lastOperand === "*" ||
+            lastOperand === "+") {
+          return userInput + "0";
+        } else {
+          return userInput;
+        }
+      }
+    });
+
+  </script>
+
+</html>

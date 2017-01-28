@@ -1,0 +1,126 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #467ECA;
+}
+
+.small-note {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: white;
+}
+
+.calculator--frame {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin: 20px auto;
+  height: 525px;
+  width: 400px;
+  background-color: #FFF;
+  border-radius: 2%;
+}
+
+.calculator--display-container {
+  width: 100%;
+  height: 150px;
+  position: relative;
+  box-shadow: 0px 1px 1px #E0E0E0;
+}
+
+.calculator--display-current {
+  display: block;
+  position: absolute;
+  overflow-x: auto;
+  font-size: 50px;
+  max-width: 390px;
+  overflow-x: auto;
+  bottom: 0;
+  right: 0;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.base--button {
+  border: 0;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  display: inline-block;
+  background-color: #FFF;
+  margin: 2px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.base--button:focus {
+  outline: 0;
+}
+
+.symbol-container {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.button-symbol {
+  position: relative;
+  line-height: 40px;
+  width: 50px;
+  margin: 0 5px;
+  font-size: 16px;
+  color: #F2BE53;
+  z-index: 2;
+}
+
+.button-symbol::before {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  top: 50%;
+  left: 50%;
+  margin-left: -20px;
+  margin-top: -19px;
+  position: absolute;
+  background-color: #FFF;
+  z-index: -1;
+  filter: drop-shadow(0px 1px 2px rgba(110, 110, 110, 0.5));
+  -webkit-filter: drop-shadow(0px 1px 2px rgba(110, 110, 110, 0.5));
+}
+
+.button-clear,
+.button-decimal {
+  font-weight: 700;
+  color: #EF5350;
+}
+
+.function-container {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  height: 50px;
+  text-align: center;
+}
+
+.button-equal {
+  display: inline-block;
+  width: 250px;
+  background-color: #F2BE53;
+  color: #FFF;
+  height: 45px;
+  font-weight: 700;
+  font-size: 30px;
+  border-radius: 10px;
+  line-height: 45px;
+  margin: 12px auto 0px auto;
+}
+
+.drop-shadow {
+  filter: drop-shadow(1px 3px 2px rgba(110, 110, 110, 0.5));
+  -webkit-filter: drop-shadow(1px 3px 2px rgba(110, 110, 110, 0.5));
+}
